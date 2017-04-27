@@ -19,7 +19,7 @@ input[type],select {
     padding: 7px 20px 7px 20px;
 }
 
-input[type]:focus {
+input[type="text"]:focus {
     width: 100%;
 }
 
