@@ -7,6 +7,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>PO List</title>
 <link rel="stylesheet" type="text/css" href="Style1.css">
+<style>
+input[type],select {
+    width: 180px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 7px 20px 7px 20px;
+}
+
+input[type="text"]:focus {
+    width: 100%;
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -20,9 +37,8 @@
 			<h1>Cimbidia</h1>
 		</td>
 		<td style="width:35%" class="searchbox" align="right" valign="middle">
-			<form >
-				<input type="text" placeholder="Search..." name="search" size="20" value=""><input type="submit" value="Go">
-				
+			<form>
+				<input type="text" placeholder="Search.." name="search">
 			</form>
 		</td>
 		<td style="width:35%" align="right" valign="top">
