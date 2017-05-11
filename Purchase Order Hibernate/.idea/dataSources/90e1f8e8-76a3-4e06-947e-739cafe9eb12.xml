@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="purchaseorder@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+    <root id="1"/>
+    <schema id="2" parent="1" name="purchaseorder">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="demo"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="sys"/>
+    <schema id="8" parent="1" name="welcome"/>
+    <table id="9" parent="2" name="address"/>
+    <table id="10" parent="2" name="destination"/>
+    <table id="11" parent="2" name="origin"/>
+    <table id="12" parent="2" name="po"/>
+    <table id="13" parent="2" name="po_destination"/>
+    <table id="14" parent="2" name="po_origin"/>
+    <column id="15" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="9" name="city">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="17" parent="9" name="country">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="18" parent="9" name="name">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="19" parent="9" name="state">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="20" parent="9" name="street">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="21" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="22" parent="10" name="Destenddate">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="23" parent="10" name="Deststartdate">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="24" parent="10" name="Id">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="25" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="26" parent="11" name="Pickupenddate">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="27" parent="11" name="Pickupstartdate">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="28" parent="11" name="Id">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="29" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="30" parent="12" name="ponumber">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="31" parent="12" name="billto">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="32" parent="12" name="carrier">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="33" parent="12" name="designatedmode">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="34" parent="12" name="duedate">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="35" parent="12" name="incoterms">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="36" parent="12" name="issuedate">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="37" parent="12" name="mustship">
+      <Position>8</Position>
+      <DataType>bit(1)|0</DataType>
+    </column>
+    <column id="38" parent="12" name="priority">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="39" parent="12" name="seller">
+      <Position>10</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="40" parent="12" name="shipfrom">
+      <Position>11</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="41" parent="12" name="shipto">
+      <Position>12</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="42" parent="12" name="status">
+      <Position>13</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="43" parent="12" name="transresp">
+      <Position>14</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="44" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ponumber</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="45" parent="13" name="Po_ponumber">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="13" name="destinationList_Id">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="47" parent="13" name="FKbpk9m4wba0drk9eecjrbgjhk3">
+      <ColNames>Po_ponumber</ColNames>
+    </index>
+    <index id="48" parent="13" name="UK_sn78e8x99bca4h9tmjhgxq3rj">
+      <ColNames>destinationList_Id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="49" parent="13" name="UK_sn78e8x99bca4h9tmjhgxq3rj">
+      <ColNames>destinationList_Id</ColNames>
+      <UnderlyingIndexName>UK_sn78e8x99bca4h9tmjhgxq3rj</UnderlyingIndexName>
+    </key>
+    <column id="50" parent="14" name="Po_ponumber">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="14" name="originList_Id">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="52" parent="14" name="FKrg4mlt3ii9qssggdjlgqkhefb">
+      <ColNames>Po_ponumber</ColNames>
+    </index>
+    <index id="53" parent="14" name="UK_eaotkwf23vksv3910wjfwkoa9">
+      <ColNames>originList_Id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="54" parent="14" name="UK_eaotkwf23vksv3910wjfwkoa9">
+      <ColNames>originList_Id</ColNames>
+      <UnderlyingIndexName>UK_eaotkwf23vksv3910wjfwkoa9</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>
