@@ -23,13 +23,13 @@ apply plugin:"asset-pipeline"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
-  /*  flatDir{
+    flatDir{
         dirs 'libs'
-    }*/
+    }
 }
 
 dependencies {
-    //compile name: 'facebook4j-core-2.4.9'
+    compile name: 'restfb-1.40.1'
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"

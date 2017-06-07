@@ -10,33 +10,35 @@ import javax.servlet.ServletException
 
 @Secured('permitAll')
 class CampController {
-    AccessToken info
+    /*AccessToken info
     String text
+    String accessToken*/
     def campaign() {
-        println("*********************************************")
         Facebook facebook = (Facebook)session.getAttribute("facebook")
 
+        String oauthCode = request.getParameter("code")
 
-        String oauthCode = request.getParameter("code");
         try {
-            facebook.getOAuthAccessToken(oauthCode);
+            facebook.getOAuthAccessToken(oauthCode)
         } catch (FacebookException e) {
-            throw new ServletException(e);
+            redirect(controller: 'fbLogout', action: 'logoutPage')
+            /*throw new ServletException(e)*/
         }
 
 
-        try {
-            info = facebook.getOAuthAccessTokenInfo();
-            System.out.println("OAuthAccessToken : "+info);
+        /*try {
+            info = facebook.getOAuthAccessTokenInfo()
+            println "OAuthAccessToken : "+info
         } catch (FacebookException e) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
         text=info.toString();
-        System.out.println("OAUTH ACCESSTOKEN : "+text);
-        String[] firstSplit=text.split("token='");
-        String[] secondSplit=firstSplit[1].split("'");
+        println "OAUTH ACCESSTOKEN : "+text
+        String[] firstSplit=text.split("token='")
+        String[] secondSplit=firstSplit[1].split("'")
+        accessToken=secondSplit[0]
         //Access Token is secondSplit[0]
-        System.out.println("AccessToken : "+secondSplit[0]);
+        println "AccessToken : "+accessToken*/
 
 
 
@@ -65,6 +67,10 @@ class CampController {
         String[] secondSplit=firstSplit[1].split("'");
         //Access Token is secondSplit[0]
         println("AccessToken : "+secondSplit[0]);*/
+        render view: 'campaign'
+    }
+
+    def campaignPage(){
         render view: 'campaign'
     }
 }

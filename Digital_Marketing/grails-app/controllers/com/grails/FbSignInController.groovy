@@ -8,18 +8,17 @@ import grails.plugin.springsecurity.annotation.Secured
 class FbSignInController {
     Facebook facebook;
     def signin() {
-       println "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-        facebook = new FacebookFactory().getInstance();
-        session.setAttribute("facebook", facebook);
-        StringBuffer callbackURL = request.getRequestURL();
-        println "Callbackurl : "+callbackURL
-        int index = callbackURL.lastIndexOf("/");
-        callbackURL.replace(index, callbackURL.length(), "").append("/callback");
-        println("Address : "+facebook.getOAuthAuthorizationURL(callbackURL.toString()).toString())
+
+        facebook = new FacebookFactory().getInstance()
+        session.setAttribute("facebook", facebook)
+        StringBuffer callbackURL = request.getRequestURL()
+
+        int index = callbackURL.lastIndexOf("/")
+        callbackURL.replace(index, callbackURL.length(), "").append("/callback")
         //facebook.getOAuthAuthorizationURL(callbackURL.toString())
         String url = facebook.getOAuthAuthorizationURL(callbackURL.toString())
-        //redirect(uri:url)
-        response.sendRedirect(facebook.getOAuthAuthorizationURL(callbackURL.toString()));
+        redirect(uri:url)
+        //response.sendRedirect(facebook.getOAuthAuthorizationURL(callbackURL.toString()));
 
 
     }

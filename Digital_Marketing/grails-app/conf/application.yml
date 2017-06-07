@@ -1,5 +1,11 @@
 ---
 grails:
+    controllers:
+        upload:
+            maxFileSize: 200000000
+            maxRequestSize: 200000000
+    guides:
+        folderPath: C:\\Users/Abhi/IdeaProjects/Digital_Marketing/grails-app/assets/images
     profile: web
     codegen:
         defaultPackage: Digital_Marketing

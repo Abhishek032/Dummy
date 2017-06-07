@@ -39,7 +39,9 @@
             <form action="/login/authenticate" method="post">
                 <input type='hidden' name='spring-security-redirect'
                        value='/sec'>
-                <input type="text" placeholder="Email" required name="username">
+                <i class="glyphicon glyphicon-user"></i>
+                <input type="text" placeholder="Email" required name="username"><br>
+                <i class="glyphicon glyphicon-lock"></i>
                 <input type="password" placeholder="Password" required name="password">
                 <input type="submit" class="btn" value="SignIn">
             </form>

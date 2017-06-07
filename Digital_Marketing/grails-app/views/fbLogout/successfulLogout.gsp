@@ -33,7 +33,7 @@
                         <%=request.getParameter("username")%>Me<button class="dropbtn"><span class="caret"></span></button>
                         <div class="dropdown-content">
                             <g:link controller="Home" action="index">Logout</g:link>
-                            <g:link controller="#" action="#">Configuration</g:link>
+                            %{--  <g:link controller="Camp" action="campaign">Campaign</g:link>--}%
                             %{--<g:link>Change Password</g:link>--}%
                         </div>
                     </div>
