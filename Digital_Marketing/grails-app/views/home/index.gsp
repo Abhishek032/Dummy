@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <asset:stylesheet src="Style.css"/>
+    <asset:stylesheet src="stylesheet.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
@@ -39,7 +39,9 @@
             <form action="/login/authenticate" method="post">
                 <input type='hidden' name='spring-security-redirect'
                        value='/sec'>
-                <input type="text" placeholder="Email" required name="username">
+                <i class="glyphicon glyphicon-user"></i>
+                <input type="text" placeholder="Email" required name="username"><br>
+                <i class="glyphicon glyphicon-lock"></i>
                 <input type="password" placeholder="Password" required name="password">
                 <input type="submit" class="btn" value="SignIn">
             </form>

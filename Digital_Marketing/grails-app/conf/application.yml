@@ -2,8 +2,8 @@
 grails:
     controllers:
         upload:
-            maxFileSize: 200000000
-            maxRequestSize: 200000000
+            maxFileSize: 1024000000
+            maxRequestSize: 1024000000
     guides:
         folderPath: C:\\Users/Abhi/IdeaProjects/Digital_Marketing/grails-app/assets/images
     profile: web

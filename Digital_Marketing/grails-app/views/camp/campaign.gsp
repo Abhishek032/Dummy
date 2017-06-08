@@ -48,10 +48,11 @@
         </div>
         <div class="content">
             <br>
-            <g:form name="campaignform" url="[controller: 'post',action:'postaction']" enctype='multipart/form-data'>
-                <input type="text" placeholder="Name"  name="campaignname">
-                <input type="text" placeholder="Title" name="campaigntitle">
-                <h3>Choose a Category to Post</h3>
+            <form>
+                %{--<input type="text" placeholder="Name"  name="campaignname">
+                <input type="text" placeholder="Title" name="campaigntitle">--}%
+                <p><input type="checkbox" id="checkme"/> By clicking this I agree to post<br>the contents on facebook wall</p>
+                <h3 class="h3color">Choose a Category to Post</h3>
                 <table border="0" style="width: 60%">
                     <tr>
                         <td style="width: 70%"><p><input type="radio" name="campaigntype"  id="link" value="link">Link</p></td>
@@ -62,9 +63,35 @@
                         <td><p><input type="radio" name="campaigntype"  id="video" value="video">Video</p></td>
                     </tr>
                 </table>
-                <input class="inputFiles" type="file" name="fileupload" multiple="multiple" accept="video/*" />
-                <input type="submit" class="postbtn" value="Next">
-                
+                <button type="button" class="postbtn" disabled="disabled" id="proceed" value="Next" onclick="getcube()">Next</button>
+                %{--<input type="submit" class="postbtn" disabled="disabled" id="proceed" value="Next" onclick="getcube()">--}%
+            </form>
+            <script type="text/javascript">
+                    function getcube(){
+                        if (document.getElementById('link').checked) {
+                            $('#linkmodal').modal('show');
+                        }else if (document.getElementById('text').checked) {
+                            $('#textmodal').modal('show');
+                        }else if (document.getElementById('image').checked) {
+                            $('#imagemodal').modal('show');
+                        }else if (document.getElementById('video').checked) {
+                            $('#videomodal').modal('show');
+                        }
+                    }
+                </script>
+                <script type="text/javascript">
+                    var checker = document.getElementById('checkme');
+                    var sendbtn = document.getElementById('proceed');
+                    // when unchecked or checked, run the function
+                    checker.onchange = function(){
+                        if(this.checked){
+                            sendbtn.disabled = false;
+                        } else {
+                            sendbtn.disabled = true;
+                        }
+
+                    }
+                </script>
             %{--<input class="inputFiles" type="file" name="fileupload" multiple="multiple" accept="image/*" />
 
 
@@ -89,7 +116,7 @@
                 </tr>
             </table>
             <textarea cols="39" rows="2" placeholder="Write here..." name="campaignmessage"></textarea>--}%
-            </g:form>
+
             <br>
             <br>
         </div>
@@ -97,3 +124,122 @@
 </div>
 </body>
 </html>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="linkmodal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
+                    <h2 class="modal-title">Campaign Data</h2>
+                </div>
+                <div class="modal-body" align="center">
+                    <g:form name="campaignform" url="[controller: 'post',action:'linkpost']">
+                        <input type="text" placeholder="Campaign Name" required name="campaignname">
+                        <input type="text" placeholder="Campaign Title" required name="campaigntitle">
+                        <textarea cols="39" rows="2" placeholder="Write here..." name="campaignmessage"></textarea>
+                        <input type="text" placeholder="Link..." required name="campaignlink">
+
+                        <input type="submit" class="btn" value="Post">
+                    </g:form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 10%;padding: 2px">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="textmodal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
+                    <h2 class="modal-title">Campaign Data</h2>
+                </div>
+                <div class="modal-body" align="center">
+                    <g:form name="campaignform" url="[controller: 'post',action:'textpost']">
+                        <input type="text" placeholder="Campaign Name" required name="campaignname">
+                        <input type="text" placeholder="Campaign Title" required name="campaigntitle">
+                        <textarea cols="39" rows="2" placeholder="Write here..." required name="campaignmessage"></textarea>
+
+                        <input type="submit" class="btn" value="Post">
+                    </g:form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 10%;padding: 2px">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="imagemodal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
+                    <h2 class="modal-title">Campaign Data</h2>
+                </div>
+                <div class="modal-body" align="center">
+                    <g:form name="campaignform" url="[controller: 'post',action:'imagepost']" enctype='multipart/form-data'>
+                        <input type="text" placeholder="Campaign Name" required name="campaignname">
+                        <input type="text" placeholder="Campaign Title" required name="campaigntitle">
+                        <textarea cols="39" rows="2" placeholder="Write here..." name="campaignmessage"></textarea>
+                        <input class="inputFiles" type="file" name="fileupload" required multiple="multiple" accept="image/*" />
+
+
+                        <input type="submit" class="btn" value="Post">
+                    </g:form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 10%;padding: 2px">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="videomodal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
+                    <h2 class="modal-title">Campaign Data</h2>
+                </div>
+                <div class="modal-body" align="center">
+                    <g:form name="campaignform" url="[controller: 'post',action:'videopost']" enctype='multipart/form-data'>
+                        <input type="text" placeholder="Campaign Name" required name="campaignname">
+                        <input type="text" placeholder="Campaign Title" required name="campaigntitle">
+                        <textarea cols="39" rows="2" placeholder="Write here..." name="campaignmessage"></textarea>
+                        <input class="inputFiles" type="file" name="fileupload" required multiple="multiple" accept="video/*" />
+                        <input type="submit" class="btn" value="Post">
+                    </g:form>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" data-dismiss="modal" style="width: 10%;padding: 2px">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
