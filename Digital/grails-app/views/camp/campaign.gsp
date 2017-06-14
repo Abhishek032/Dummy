@@ -26,11 +26,11 @@
                 </td>
                 <td style="width:15%" align="left" valign="middle">
                     <div class="dropdown">
-                        <%=request.getParameter("username")%>Me<button class="dropbtn"> <span class="caret"></span></button>
+                        <%=username%><button class="dropbtn"> <span class="caret"></span></button>
                         <div class="dropdown-content">
 
                             <g:link controller='logout'>Logout</g:link>
-                            <g:link controller="FbLogout" action="logout">Facebook Logout</g:link>
+
                             %{--<g:link controller="#" action="#">Change Password</g:link>--}%
                         </div>
                     </div>

@@ -1,20 +1,21 @@
 package com.com
 
+import com.digital.auth.User
 import com.digital.user.FacebookData
 import com.restfb.DefaultFacebookClient
 import com.restfb.FacebookClient
 import com.restfb.Parameter
-import com.restfb.types.User
 import facebook4j.Facebook
 import facebook4j.FacebookException
 import facebook4j.FacebookFactory
 import facebook4j.auth.AccessToken
 
 class CampController {
+    def springSecurityService
     AccessToken info
     String text
     def campaign() {
-        println("******************************8")
+
         Facebook facebook = (Facebook)session.getAttribute("facebook")
         String oauthCode = request.getParameter("code")
 
@@ -27,53 +28,43 @@ class CampController {
         text=info.toString();
         String[] firstSplit=text.split("token='")
         String[] secondSplit=firstSplit[1].split("'")
-        def fbdata = new FacebookData()
-        fbdata.accessToken=secondSplit[0]//AccessToken
 
-        FacebookClient fbClient = new DefaultFacebookClient(fbdata.accessToken);
+        def currentUser = springSecurityService.currentUser
+        def name=currentUser.getUsername()
+        def id=currentUser.getId()
 
-        User fbuser = fbClient.fetchObject("me",User.class, Parameter.with("fields", "name,id"));
-        fbdata.facebookName = fbuser.getName()
-        fbdata.facebookId = fbuser.getId()
-
-        /*fbdata.save()
-        if(!fbData.save()){
-            println("errors"+fbData.errors)
-        }*/
+        def fbdata = new FacebookData(name: "FacebookData")
 
 
+        def accessToken=secondSplit[0]//AccessToken
+        fbdata.setAccessToken(accessToken)
+        FacebookClient fbClient = new DefaultFacebookClient(accessToken);
 
+        com.restfb.types.User fbuser = fbClient.fetchObject("me",com.restfb.types.User.class, Parameter.with("fields", "name,id"));
 
-
-
-
-
-
-
-        /*AccessToken info
-        println("******"+facebook)
-        try {
-            String oauthCode = params.get("code")
-            try {
-                info = facebook.getOAuthAccessToken(oauthCode);
-            } catch (FacebookException e) {
-                throw new ServletException(e);
+        def fb=FacebookData.list()
+        int count=0;
+        for(FacebookData fdata:fb){
+            if(fdata.getFacebookId().equals(fbuser.getId()))
+            {
+                if(fdata.userId==id)
+                    count++
             }
-
-            println("OAuthAccessToken : "+info);
-        } catch (FacebookException e) {
-            e.printStackTrace();
         }
-        text=info.toString();
-        println("OAUTH ACCESSTOKEN : "+text);
-        String[] firstSplit=text.split("token='");
-        String[] secondSplit=firstSplit[1].split("'");
-        //Access Token is secondSplit[0]
-        println("AccessToken : "+secondSplit[0]);*/
-        render view: 'campaign'
+        if(count==0){
+            fbdata.setFacebookName(fbuser.getName())
+            fbdata.setFacebookId(fbuser.getId())
+            currentUser.addToFacebookData(fbdata)
+            fbdata.save(flush: true)
+        }
+        //render (view: 'campaign', model:[username:name ])
+        redirect(controller: 'camp', action: 'campaignPage')
     }
 
     def campaignPage(){
-        render view: 'campaign'
+        def currentUser = springSecurityService.currentUser
+        def name=currentUser.getUsername()
+        render (view: 'campaign', model:[username:name ])
+        //render view: 'campaign'
     }
 }
