@@ -105,8 +105,10 @@ class PostController {
                 def fileUpload = request.getFile('fileupload')
                 Byte[] file=fileUpload.getBytes()
                 def filename=fileUpload.getOriginalFilename()
+                def filetype=fileUpload.getContentType()
                 camp.setMediaFile(file)
                 camp.setMediaName(filename)
+                camp.setMediaType(filetype)
                 data.addToCampaignDetails(camp).save()
                 camp.save(flush: true)
 
@@ -146,8 +148,10 @@ class PostController {
                 def fileUpload = request.getFile('fileupload')
                 Byte[] file=fileUpload.getBytes()
                 def filename=fileUpload.getOriginalFilename()
+                def filetype=fileUpload.getContentType()
                 camp.setMediaFile(file)
                 camp.setMediaName(filename)
+                camp.setMediaType(filetype)
                 data.addToCampaignDetails(camp).save()
                 camp.save(flush: true)
 
