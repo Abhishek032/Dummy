@@ -22,7 +22,6 @@ class UserController {
         testuser= user.save(failonError:true)
         testRole=  Role.findByAuthority('ROLE_ADMIN')
         UserRole.create(testuser,testRole,true)
-        println("*****************************************************"+Role.get(1))
         redirect(uri: "/")
     }
 

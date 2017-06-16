@@ -1,13 +1,10 @@
 package com.com
 
-import com.digital.auth.User
 import com.digital.user.FacebookData
 import com.restfb.DefaultFacebookClient
 import com.restfb.FacebookClient
 import com.restfb.Parameter
 import facebook4j.Facebook
-import facebook4j.FacebookException
-import facebook4j.FacebookFactory
 import facebook4j.auth.AccessToken
 
 class CampController {
@@ -30,7 +27,6 @@ class CampController {
         String[] secondSplit=firstSplit[1].split("'")
 
         def currentUser = springSecurityService.currentUser
-        def name=currentUser.getUsername()
         def id=currentUser.getId()
 
         def fbdata = new FacebookData(name: "FacebookData")

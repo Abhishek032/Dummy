@@ -115,7 +115,7 @@
                 <h2 class="modal-title">Campaign Data</h2>
             </div>
             <div class="modal-body" align="center">
-                <g:form name="campaignform" url="[controller: 'post',action:'linkPost']">
+                <g:form name="campaignform" url="[controller: 'post',action:'linkpost']">
                     <input type="text" placeholder="Campaign Name" required name="campaignName">
                     <input type="text" placeholder="Campaign Title" required name="campaignTitle">
                     <textarea cols="39" rows="2" placeholder="Write here..." name="campaignMessage"></textarea>
@@ -145,7 +145,7 @@
                 <h2 class="modal-title">Campaign Data</h2>
             </div>
             <div class="modal-body" align="center">
-                <g:form name="campaignform" url="[controller: 'post',action:'textPost']">
+                <g:form name="campaignform" url="[controller: 'post',action:'textpost']">
                     <input type="text" placeholder="Campaign Name" required name="campaignName">
                     <input type="text" placeholder="Campaign Title" required name="campaignTitle">
                     <textarea cols="39" rows="2" placeholder="Write here..." required name="campaignMessage"></textarea>
@@ -174,7 +174,7 @@
                 <h2 class="modal-title">Campaign Data</h2>
             </div>
             <div class="modal-body" align="center">
-                <g:form name="campaignform" url="[controller: 'post',action:'imagePost']" enctype='multipart/form-data'>
+                <g:form name="campaignform" url="[controller: 'post',action:'imagepost']" enctype='multipart/form-data'>
                     <input type="text" placeholder="Campaign Name" required name="campaignName">
                     <input type="text" placeholder="Campaign Title" required name="campaignTitle">
                     <textarea cols="39" rows="2" placeholder="Write here..." name="campaignMessage"></textarea>
@@ -201,7 +201,7 @@
                 <h2 class="modal-title">Campaign Data</h2>
             </div>
             <div class="modal-body" align="center">
-                <g:form name="campaignform" url="[controller: 'post',action:'videoPost']" enctype='multipart/form-data'>
+                <g:form name="campaignform" url="[controller: 'post',action:'videopost']" enctype='multipart/form-data'>
                     <input type="text" placeholder="Campaign Name" required name="campaignName">
                     <input type="text" placeholder="Campaign Title" required name="campaignTitle">
                 %{--<textarea cols="39" rows="2" placeholder="Write here..." name="campaignMessage"></textarea>--}%

@@ -12,7 +12,6 @@ class FbSignInController {
         println("sdfdsfdsfsdfsdfds")
     }
     def signin() {
-        println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV")
         facebook = new FacebookFactory().getInstance()
         session.setAttribute("facebook", facebook)
         StringBuffer callbackURL = request.getRequestURL()

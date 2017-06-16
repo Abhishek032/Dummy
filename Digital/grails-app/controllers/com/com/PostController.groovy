@@ -1,5 +1,6 @@
 package com.com
 
+import com.digital.user.CampaignDetails
 import com.digital.user.FacebookData
 import com.restfb.BinaryAttachment
 import com.restfb.DefaultFacebookClient
@@ -12,142 +13,165 @@ import facebook4j.FacebookException
 class PostController {
     def springSecurityService
 
-    def linkpost() {
-
+    def linkPost(CampaignDetails camp) {
         def currentUser = springSecurityService.currentUser
         def id=currentUser.getId()
-        println("UserId : "+id)
-        def fbdata = FacebookData.list()
-        for(FacebookData data:fbdata)
+        def fb=FacebookData.list()
+        for(FacebookData data:fb)
         {
             if(data.userId==id){
+
                 FacebookClient fbClient = new DefaultFacebookClient(data.getAccessToken());
 
-                //Post Link
-                if (params.campaignMessage != null) {
+                //First post then save-------------------------------------------
+
+                /*if (params.campaignMessage != null) {
                     def link = params.campaignLink
                     def message = params.campaignMessage
                     FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("message", message),
                             Parameter.with("link", link));
+                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
                     System.out.println("facebook.com/" + response.getId());
                 } else {
                     def link = params.campaignLink
 
                     FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("link", link));
+                    camp.setCampaignUrl(response.getId())
                     System.out.println("facebook.com/" + response.getId());
+                }
+                data.addToCampaignDetails(camp).save()
+                camp.save(flush: true)*/
+
+
+                //First save then post from databse---------------------------------------
+
+                data.addToCampaignDetails(camp).save()
+                camp.save(flush: true)
+                if(camp.getCampaignMessage()!=null){
+                    def link = camp.getCampaignLink()
+                    def message = camp.getCampaignMessage()
+                    FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("message", message),
+                            Parameter.with("link", link));
+                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                    camp.save(flush: true)
+                    println("facebook.com/" + response.getId());
+                }else{
+                    def link = camp.getCampaignLink()
+                    FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("message", message),
+                            Parameter.with("link", link));
+                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                    camp.save(flush: true)
+                    println("facebook.com/" + response.getId());
                 }
             }
         }
         redirect(controller: 'camp', action: 'campaignPage')
+
     }
 
-    def textpost() {
-
+    def textPost(CampaignDetails camp) {
         def currentUser = springSecurityService.currentUser
         def id=currentUser.getId()
-        println("UserId : "+id)
-        def fbdata = FacebookData.list()
-        for(FacebookData data:fbdata) {
-            if (data.userId == id) {
+        def fb=FacebookData.list()
+        for(FacebookData data:fb)
+        {
+            if(data.userId==id){
                 FacebookClient fbClient = new DefaultFacebookClient(data.getAccessToken());
 
-                //Post Message
-                def message = params.campaignMessage
+                data.addToCampaignDetails(camp).save()
+                camp.save(flush: true)
+
+                def message = camp.getCampaignMessage()
                 FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("message", message));
+                camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                camp.save(flush: true)
                 System.out.println("facebook.com/" + response.getId());
             }
         }
         redirect(controller: 'camp', action: 'campaignPage')
     }
 
-    def imagepost() {
-        //Retrieve Image-------------------------------------------
-        def fileUpload = request.getFile('fileupload')
-        def filename = fileUpload.getOriginalFilename()
-        /*String tempPath = grailsApplication.config.jsonToCsvReplace;//.replace("temporary.json", "temporary"+new Date().getTime()+".json")*/
-        String tempPath = grailsApplication.config.getRequiredProperty('grails.guides.folderPath')
-        tempPath = tempPath + "/" + filename
-        File tempFile = new File(tempPath)
-        fileUpload.transferTo(tempFile)
+    def imagePost(CampaignDetails camp) {
 
         def currentUser = springSecurityService.currentUser
         def id=currentUser.getId()
-        println("UserId : "+id)
-        def fbdata = FacebookData.list()
-        for(FacebookData data:fbdata) {
-            if (data.userId == id) {
+        def fb=FacebookData.list()
+        for(FacebookData data:fb)
+        {
+            if(data.userId==id){
                 FacebookClient fbClient = new DefaultFacebookClient(data.getAccessToken());
-                //Post Image
-                if (params.campaignMessage != null) {
-                    def message = params.campaignMessage
-                    try {
-                        FileInputStream fis = new FileInputStream(new File(tempPath));
-                        FacebookType response = fbClient.publish("me/photos", FacebookType.class, BinaryAttachment.with("image.jpg", fis), Parameter.with("message", message))
-                        println("facebook.com/" + response.getId())
 
-                    } catch (Exception ex) {
-                        ex.printStackTrace()
-                    }
-                } else {
-                    try {
-                        FileInputStream fis = new FileInputStream(new File(tempPath));
-                        FacebookType response = fbClient.publish("me/photos", FacebookType.class, BinaryAttachment.with("image.jpg", fis))
-                        println("facebook.com/" + response.getId())
+                //Receive file and save to database
+                def fileUpload = request.getFile('fileupload')
+                Byte[] file=fileUpload.getBytes()
+                def filename=fileUpload.getOriginalFilename()
+                camp.setMediaFile(file)
+                camp.setMediaName(filename)
+                data.addToCampaignDetails(camp).save()
+                camp.save(flush: true)
 
-                    } catch (Exception ex) {
-                        ex.printStackTrace()
-                    }
+
+                if(camp.getCampaignMessage()!=null){
+                    def message = camp.getCampaignMessage()
+                    Byte[] media=camp.getMediaFile()
+                    //def fis = FileUtils.writeByteArrayToFile(new File("pathname"), media)
+                    InputStream fis = new ByteArrayInputStream(media);
+                    FacebookType response = fbClient.publish("me/photos", FacebookType.class, BinaryAttachment.with("image.jpg", fis), Parameter.with("message", message))
+                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                    camp.save(flush: true)
+                    println("facebook.com/" + response.getId());
+                }else{
+                    def media=camp.getMediaFile()
+                    InputStream fis = new ByteArrayInputStream(media);
+                    FacebookType response = fbClient.publish("me/photos", FacebookType.class, BinaryAttachment.with("image.jpg", fis))
+                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                    camp.save(flush: true)
+                    println("facebook.com/" + response.getId());
                 }
             }
         }
         redirect(controller: 'camp', action: 'campaignPage')
     }
 
-    def videopost() {
-
-        //Retrieve Video
-        def fileUpload = request.getFile('fileupload')
-        def filename = fileUpload.getOriginalFilename()
-        //*String tempPath = grailsApplication.config.jsonToCsvReplace;//.replace("temporary.json", "temporary"+new Date().getTime()+".json")*//*
-        String tempPath = grailsApplication.config.getRequiredProperty('grails.guides.folderPath')
-        tempPath = tempPath + "/" + filename
-        File tempFile = new File(tempPath)
-        fileUpload.transferTo(tempFile)
-
+    def videoPost(CampaignDetails camp) {
         def currentUser = springSecurityService.currentUser
         def id=currentUser.getId()
-        println("UserId : "+id)
-        def fbdata = FacebookData.list()
-        for(FacebookData data:fbdata) {
-            if (data.userId == id) {
+        def fb=FacebookData.list()
+        for(FacebookData data:fb)
+        {
+            if(data.userId==id){
                 FacebookClient fbClient = new DefaultFacebookClient(data.getAccessToken());
 
-                //Post Video
-                if (params.campaignMessage != null) {
-                    def message = params.campaignMessage
-                    FileInputStream fisv = new FileInputStream(new File("E:\\YouTube.mp4"));
-                    FacebookType response1 = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video1.mp4", fisv), Parameter.with("message", "Hiiiiiiiiiiiii"))
-                    try {
-                        FileInputStream fis = new FileInputStream(new File(tempPath));
-                        println("message : "+message)
-                        FacebookType response = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video.mp4", fis), Parameter.with("message", message))
-                        println("facebook.com/" + response.getId())
+                //Receive file and save to database
+                def fileUpload = request.getFile('fileupload')
+                Byte[] file=fileUpload.getBytes()
+                def filename=fileUpload.getOriginalFilename()
+                camp.setMediaFile(file)
+                camp.setMediaName(filename)
+                data.addToCampaignDetails(camp).save()
+                camp.save(flush: true)
 
-                    } catch (Exception ex) {
-                        ex.printStackTrace()
-                    }
-                } else {
-                    try {
-                        FileInputStream fis = new FileInputStream(new File(tempPath));
-                        FacebookType response = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video.mp4", fis))
-                        println("facebook.com/" + response.getId())
 
-                    } catch (Exception ex) {
-                        ex.printStackTrace()
-                    }
+                if(camp.getCampaignMessage()!=null){
+                    def message = camp.getCampaignMessage()
+                    Byte[] media=camp.getMediaFile()
+                    //def fis = FileUtils.writeByteArrayToFile(new File("pathname"), media)
+                    InputStream fis = new ByteArrayInputStream(media);
+                    FacebookType response = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video.mp4", fis), Parameter.with("message", message))
+                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                    camp.save(flush: true)
+                    println("facebook.com/" + response.getId());
+                }else{
+                    def media=camp.getMediaFile()
+                    InputStream fis = new ByteArrayInputStream(media);
+                    FacebookType response = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video.mp4", fis))
+                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                    camp.save(flush: true)
+                    println("facebook.com/" + response.getId());
                 }
             }
         }
         redirect(controller: 'camp', action: 'campaignPage')
+
     }
 }

@@ -7,7 +7,6 @@ class SecureController {
     def index() {
         def currentUser = springSecurityService.currentUser
         def name=currentUser.getUsername()
-        println("#######################")
         render (view: 'welcome', model:[username:name ])
     }
 }
