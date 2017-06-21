@@ -12,7 +12,7 @@ import facebook4j.FacebookException
 
 class PostController {
     def springSecurityService
-
+    Boolean success=true
     def linkPost(CampaignDetails camp) {
         def currentUser = springSecurityService.currentUser
         def id=currentUser.getId()
@@ -91,8 +91,7 @@ class PostController {
         redirect(controller: 'camp', action: 'campaignPage')
     }
 
-    def imagePost(CampaignDetails camp) {
-
+    def mediaPost(CampaignDetails camp) {
         def currentUser = springSecurityService.currentUser
         def id=currentUser.getId()
         def fb=FacebookData.list()
@@ -100,7 +99,6 @@ class PostController {
         {
             if(data.userId==id){
                 FacebookClient fbClient = new DefaultFacebookClient(data.getAccessToken());
-
                 //Receive file and save to database
                 def fileUpload = request.getFile('fileupload')
                 Byte[] file=fileUpload.getBytes()
@@ -113,69 +111,55 @@ class PostController {
                 camp.save(flush: true)
 
 
-                if(camp.getCampaignMessage()!=null){
-                    def message = camp.getCampaignMessage()
-                    Byte[] media=camp.getMediaFile()
-                    //def fis = FileUtils.writeByteArrayToFile(new File("pathname"), media)
-                    InputStream fis = new ByteArrayInputStream(media);
-                    FacebookType response = fbClient.publish("me/photos", FacebookType.class, BinaryAttachment.with("image.jpg", fis), Parameter.with("message", message))
-                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
-                    camp.save(flush: true)
-                    println("facebook.com/" + response.getId());
+                def type=camp.getMediaType()
+                String[] types=type.split("/")
+                if(types[0].equals("image")){
+                    if(camp.getCampaignMessage()!=null){
+                        def message = camp.getCampaignMessage()
+                        Byte[] media=camp.getMediaFile()
+                        //def fis = FileUtils.writeByteArrayToFile(new File("pathname"), media)
+                        InputStream fis = new ByteArrayInputStream(media);
+                        FacebookType response = fbClient.publish("me/photos", FacebookType.class, BinaryAttachment.with("image.jpg", fis), Parameter.with("message", message))
+                        camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                        camp.save(flush: true)
+                        println("facebook.com/" + response.getId());
+                    }else{
+                        def media=camp.getMediaFile()
+                        InputStream fis = new ByteArrayInputStream(media);
+                        FacebookType response = fbClient.publish("me/photos", FacebookType.class, BinaryAttachment.with("image.jpg", fis))
+                        camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                        camp.save(flush: true)
+                        println("facebook.com/" + response.getId());
+                    }
+                }
+                else if(types[0].equals("video")){
+                    if(camp.getCampaignMessage()!=null){
+                        def message = camp.getCampaignMessage()
+                        Byte[] media=camp.getMediaFile()
+                        //def fis = FileUtils.writeByteArrayToFile(new File("pathname"), media)
+                        InputStream fis = new ByteArrayInputStream(media);
+                        FacebookType response = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video.mp4", fis), Parameter.with("message", message))
+                        camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                        camp.save(flush: true)
+                        println("facebook.com/" + response.getId());
+                    }else{
+                        def media=camp.getMediaFile()
+                        InputStream fis = new ByteArrayInputStream(media);
+                        FacebookType response = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video.mp4", fis))
+                        camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
+                        camp.save(flush: true)
+                        println("facebook.com/" + response.getId());
+                    }
                 }else{
-                    def media=camp.getMediaFile()
-                    InputStream fis = new ByteArrayInputStream(media);
-                    FacebookType response = fbClient.publish("me/photos", FacebookType.class, BinaryAttachment.with("image.jpg", fis))
-                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
-                    camp.save(flush: true)
-                    println("facebook.com/" + response.getId());
+                        success=false
                 }
             }
         }
-        redirect(controller: 'camp', action: 'campaignPage')
-    }
+        if(success)
+            redirect(controller: 'camp', action: 'campaignPage')
+        else
+            redirect(controller: 'camp', action: 'ProblemCampaign')
 
-    def videoPost(CampaignDetails camp) {
-        def currentUser = springSecurityService.currentUser
-        def id=currentUser.getId()
-        def fb=FacebookData.list()
-        for(FacebookData data:fb)
-        {
-            if(data.userId==id){
-                FacebookClient fbClient = new DefaultFacebookClient(data.getAccessToken());
-
-                //Receive file and save to database
-                def fileUpload = request.getFile('fileupload')
-                Byte[] file=fileUpload.getBytes()
-                def filename=fileUpload.getOriginalFilename()
-                def filetype=fileUpload.getContentType()
-                camp.setMediaFile(file)
-                camp.setMediaName(filename)
-                camp.setMediaType(filetype)
-                data.addToCampaignDetails(camp).save()
-                camp.save(flush: true)
-
-
-                if(camp.getCampaignMessage()!=null){
-                    def message = camp.getCampaignMessage()
-                    Byte[] media=camp.getMediaFile()
-                    //def fis = FileUtils.writeByteArrayToFile(new File("pathname"), media)
-                    InputStream fis = new ByteArrayInputStream(media);
-                    FacebookType response = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video.mp4", fis), Parameter.with("message", message))
-                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
-                    camp.save(flush: true)
-                    println("facebook.com/" + response.getId());
-                }else{
-                    def media=camp.getMediaFile()
-                    InputStream fis = new ByteArrayInputStream(media);
-                    FacebookType response = fbClient.publish("me/videos", FacebookType.class, BinaryAttachment.with("video.mp4", fis))
-                    camp.setCampaignUrl("https://www.facebook.com/"+response.getId())
-                    camp.save(flush: true)
-                    println("facebook.com/" + response.getId());
-                }
-            }
-        }
-        redirect(controller: 'camp', action: 'campaignPage')
 
     }
 }

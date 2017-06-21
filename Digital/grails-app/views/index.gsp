@@ -1,4 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <asset:stylesheet src="stylesheet.css"/>
@@ -31,7 +30,7 @@
     <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 relative" align="center" >
 
         <div class="para">
-            <h2 class="ap">SignIn</h2>
+            <h2 class="ap">Sign In</h2>
         </div>
         <div class="content">
             <br>
@@ -42,7 +41,7 @@
                 <input type="text" placeholder="User Name" required name="username"><br>
                 <i class="glyphicon glyphicon-lock"></i>
                 <input type="password" placeholder="Password" required name="password">
-                <input type="submit" class="btn" value="SignIn">
+                <input type="submit" class="btn" value="Sign In">
             </form>
             <br>
             <br>
@@ -75,7 +74,7 @@
             <div class="modal-content">
                 <div class="modal-header" align="center">
                     <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
-                    <h2 class="modal-title">SignUp</h2>
+                    <h2 class="modal-title">Create Account</h2>
                 </div>
                 <div class="modal-body" align="center">
                     <g:form name="my" url="[controller:'User', action:'createUser']">
@@ -85,7 +84,7 @@
                         <input type="text" placeholder="Industry" required name="industry">
                         <input type="text" placeholder="Company Name" required name="company">
                         <input type="password" placeholder="Password" required name="password">
-                        <input type="submit" class="btn" value="SignUp">
+                        <input type="submit" class="btn" value="Sign Up">
                     </g:form>
                 </div>
                 <div class="modal-footer">

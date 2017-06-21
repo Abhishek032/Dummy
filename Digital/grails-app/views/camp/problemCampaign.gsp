@@ -1,4 +1,3 @@
-<%@ page import="com.digital.user.FacebookData" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,43 +44,15 @@
 
     <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 relative" align="center" >
 
+        <p>*Post Failed: Only Image/Video file can be Posted</p>
         <div class="para">
             <h2 class="ap">Create Campaign</h2>
         </div>
         <div class="content">
             <br>
-
-
-            %{--<table border=0>
-
-                <%if(userFbData!=null){
-                    for(int i=0;i<userFbData.size();i++){
-                        FacebookData fbdata=(FacebookData)userFbData.get(i)
-                        %>
-                <tr>
-                    <td>
-                        <p>Facebook Name </p>
-                    </td>
-                    <td>
-                        <p><%=fbdata.getFacebookName()%></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Facebook Id </p>
-                    </td>
-                    <td>
-                        <p><%=fbdata.getFacebookId()%></p>
-                    </td>
-                </tr>
-                    <%} }
-                %>
-
-            </table>--}%
-
-
-
             <form>
+                %{--<input type="text" placeholder="Name"  name="campaignname">
+                <input type="text" placeholder="Title" name="campaigntitle">--}%
                 <p><input type="checkbox" id="checkme"/> By clicking this I agree to post<br>the contents on facebook wall</p>
                 <h3 class="h3color">Choose a Category to Post</h3>
                 <table border="0" style="width: 60%">
@@ -95,38 +66,34 @@
                     </tr>
                 </table>
                 <button type="button" class="postbtn" disabled="disabled" id="proceed" value="Next" onclick="getcube()">Next</button>
+                %{--<input type="submit" class="postbtn" disabled="disabled" id="proceed" value="Next" onclick="getcube()">--}%
             </form>
-
-
-            <g:javascript>
+            <script type="text/javascript">
                 function getcube(){
-                    if(${fbcheck}){
-                        if (document.getElementById('link').checked) {
-                            $('#linkmodal').modal('show');
-                        } else if (document.getElementById('text').checked) {
-                            $('#textmodal').modal('show');
-                        } else if (document.getElementById('image').checked) {
-                            $('#imagemodal').modal('show');
-                        } else if (document.getElementById('video').checked) {
-                            $('#videomodal').modal('show');
-                        }
-                    }else {
-                        $('#facebookmodal').modal('show');
+                    if (document.getElementById('link').checked) {
+                        $('#linkmodal').modal('show');
+                    }else if (document.getElementById('text').checked) {
+                        $('#textmodal').modal('show');
+                    }else if (document.getElementById('image').checked) {
+                        $('#imagemodal').modal('show');
+                    }else if (document.getElementById('video').checked) {
+                        $('#videomodal').modal('show');
                     }
                 }
-            </g:javascript>
-
-            <g:javascript>
+            </script>
+            <script type="text/javascript">
                 var checker = document.getElementById('checkme');
                 var sendbtn = document.getElementById('proceed');
+                // when unchecked or checked, run the function
                 checker.onchange = function(){
                     if(this.checked){
                         sendbtn.disabled = false;
                     } else {
                         sendbtn.disabled = true;
                     }
+
                 }
-            </g:javascript>
+            </script>
             <br>
             <br>
         </div>
@@ -146,7 +113,7 @@
         <div class="modal-content">
             <div class="modal-header" align="center">
                 <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
-                <h2 class="modal-title">Create Campaign</h2>
+                <h2 class="modal-title">Campaign Data</h2>
             </div>
             <div class="modal-body" align="center">
                 <g:form name="campaignform" url="[controller: 'post',action:'linkPost']">
@@ -176,7 +143,7 @@
         <div class="modal-content">
             <div class="modal-header" align="center">
                 <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
-                <h2 class="modal-title">Create Campaign</h2>
+                <h2 class="modal-title">Campaign Data</h2>
             </div>
             <div class="modal-body" align="center">
                 <g:form name="campaignform" url="[controller: 'post',action:'textPost']">
@@ -205,7 +172,7 @@
         <div class="modal-content">
             <div class="modal-header" align="center">
                 <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
-                <h2 class="modal-title">Create Campaign</h2>
+                <h2 class="modal-title">Campaign Data</h2>
             </div>
             <div class="modal-body" align="center">
                 <g:form name="campaignform" url="[controller: 'post',action:'mediaPost']" enctype='multipart/form-data'>
@@ -232,7 +199,7 @@
         <div class="modal-content">
             <div class="modal-header" align="center">
                 <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
-                <h2 class="modal-title">Create Campaign</h2>
+                <h2 class="modal-title">Campaign Data</h2>
             </div>
             <div class="modal-body" align="center">
                 <g:form name="campaignform" url="[controller: 'post',action:'mediaPost']" enctype='multipart/form-data'>
@@ -242,30 +209,6 @@
                     <input class="inputFiles" type="file" name="fileupload" required multiple="multiple" accept="video/*" />
                     <input type="submit" class="btn" value="Post">
                 </g:form>
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" data-dismiss="modal" style="width: 10%;padding: 2px">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="facebookmodal" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" align="center">
-                <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
-                <h2 class="modal-title">Add Facebook</h2>
-            </div>
-            <div class="modal-body" align="center">
-                <g:form name="myform" url="[controller:'FbSignIn', action:'signin']">
-                <input type="submit" class="fbbtn" style="width: 50%" value="Facebook">
-            </g:form>
             </div>
             <div class="modal-footer">
 

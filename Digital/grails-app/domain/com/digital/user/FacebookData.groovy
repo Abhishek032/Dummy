@@ -11,11 +11,14 @@ class FacebookData {
     String accessToken
     String facebookName
     String facebookId
+    String profilePicUrl
 
     static constraints = {
         accessToken(nullable:true, blank:false)
         facebookName(nullable:true, blank:false)
         facebookId(nullable:true, blank:false)
+        profilePicUrl(nullable:true, blank:false)
     }
+
 
 }

@@ -41,7 +41,7 @@
 </div>
 <div class="row-custom">
     <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 relative" align="center" >
-
+        <p>*Failed to Add Facebook Account Try Again </p>
         <g:form name="myform" url="[controller:'FbSignIn', action:'signin']">
             <input type="submit" class="fbbtn" value="Facebook">
         </g:form>

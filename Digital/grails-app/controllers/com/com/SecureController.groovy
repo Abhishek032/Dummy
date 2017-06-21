@@ -6,7 +6,7 @@ class SecureController {
     def springSecurityService
     def index() {
         def currentUser = springSecurityService.currentUser
-        def name=currentUser.getUsername()
+        def name = currentUser.getUsername()
         render (view: 'welcome', model:[username:name ])
     }
 }

@@ -18,9 +18,9 @@ class BootStrap {
             it.clear()
         }
 
-        assert User.count() == 1
+        /*assert User.count() == 1
         assert Role.count() == 1
-        assert UserRole.count() == 1
+        assert UserRole.count() == 1*/
 
     }
 }

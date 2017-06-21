@@ -1,3 +1,4 @@
+
 div.container {
     background-color: #006666;
     width: 100%;
@@ -27,19 +28,28 @@ header {
 
 .postbtn{
     margin-top:20px;
-    background-color: #8cb3d9;
+    color:#f2f2f2;
+    background-color: #6699cc;
     width: 30%;
-}
-/*.postbtn:hover {
-    color:#ffffff;
     text-decoration: none;
-    background-color: #19334d
-}*/
+}
 
 .btn:hover {
     color:#ffffff;
     text-decoration: none;
     background-color: #808080
+}
+
+.fbbtn{
+    color:#ffffff;
+    padding: 10px;
+    background:#3b5998 ;
+}
+
+.fbbtn:hover {
+    color:#f2f2f2;
+    text-decoration: none;
+    background-color: #2b406e;
 }
 
 .btn{
