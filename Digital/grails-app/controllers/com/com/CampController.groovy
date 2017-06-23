@@ -36,6 +36,7 @@ class CampController {
             def fbdata = new FacebookData(name: "FacebookData")
             def shortLivedToken =secondSplit[0]
 
+            //To extend Token expiration.......................
             info = facebook.extendTokenExpiration(shortLivedToken );
             text=info.toString();
             String[] firstSplitAgain=text.split("token='")
@@ -76,7 +77,7 @@ class CampController {
                 fbdata.save(flush: true)
             }
         //render (view: 'campaign', model:[username:name ])
-            redirect(controller: 'camp', action: 'campaignPage')
+            redirect(controller: 'secure', action: 'index')
         }catch (Exception e){
                 e.printStackTrace()
         }
@@ -85,24 +86,20 @@ class CampController {
     def campaignPage(){
         //Retriving associated fb accounts
 
-        List<FacebookData> fblist=new ArrayList<FacebookData>()
         def currentUser = springSecurityService.currentUser
+        List<FacebookData> fblist=new ArrayList<FacebookData>()
         Boolean check=false
+        Boolean fbselect=false
         def id=currentUser.getId()
         def fb=FacebookData.list()
         for(FacebookData data:fb) {
             if (data.userId == id) {
-                fblist.add(data)
                 check=true
+                fblist.add(data)
             }
         }
         def name=currentUser.getUsername()
-        println("#############"+fblist.size())
-        for(FacebookData f:fblist){
-            println("Facebook Name : "+f.getFacebookName())
-            println("Facebook Id : "+f.getFacebookId())
-        }
-        render (view: 'campaign', model:[username : name, fbcheck : check, userFbData : fblist ])
+        render (view: 'campaign', model:[username : name, userFbData : fblist, fbcheck : check, fbSelect:fbselect])
         //render view: 'campaign'
     }
 

@@ -1,0 +1,277 @@
+a:link, a:visited{
+    display:block;
+
+    color:#0066ff;
+    text-decoration:none;
+
+    padding:5px;
+}
+a:hover, a:active{
+    background-color:#cce6ff;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    float: left;
+}
+.scroll{
+    background-color: white;
+    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.scroll1{
+    background-color: white;
+    width: 285px;
+    height: 250px;
+    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+div.container {
+    background-color: #006666;
+    width: 100%;
+}
+
+header {
+    padding: 1em;
+    color: white;
+}
+.content{
+    border-bottom-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    background-color: #2d5986;
+}
+
+.btn:hover {
+    color:#ffffff;
+    text-decoration: none;
+    background-color: #19334d
+}
+
+.btn{
+    margin-top:20px;
+    background-color: #204060;
+    padding: 15px;
+}
+
+.homebtn{
+    color: #ffffff;
+    width: 50%;
+    margin-top:20px;
+    padding: 30px;
+    font-size: 20px;
+}
+.homebtn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.row-custom{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.fbbtn{
+    padding: 15px;
+    background:#3b5998 ;
+}
+
+.fbbtn:hover {
+    color:#ffffff;
+    text-decoration: none;
+    background-color: #2b406e;
+}
+.postbtn{
+    margin-top:20px;
+    background-color: #8cb3d9;
+    width: 30%;
+}
+.postbtn:hover {
+    color:#ffffff;
+    text-decoration: none;
+    background-color: #19334d
+}
+.ap{
+    color:white;
+    margin-bottom:0px;
+    margin-top:0;
+    padding:10Px;
+}
+
+.row{
+    margin:0px;
+    padding:0px;
+}
+
+.para{
+    border-top-right-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    background-color: #204060;
+}
+
+.relative{
+    padding:0px;
+    margin-top:5%;
+    border-radius:2px;
+    height:400px;
+    align: center;
+}
+
+p{
+    color:silver;
+}
+
+.h3color,.h5color{
+    color:silver;
+}
+input[type='submit']{
+    width: 80%;
+    margin-bottom: 20px;
+    background: rgba(0,0,0,0.3);
+    border: none;
+    outline: none;
+    padding: 0px;
+    font-size: 13px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 10px;
+    box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+}
+
+.ad{
+    width: 80%;
+    margin-bottom: 20px;
+    background: rgba(0,0,0,0.3);
+    border: none;
+    outline: none;
+    padding: 0px;
+    font-size: 13px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 10px;
+    box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+}
+
+input[type='text']{
+    width: 90%;
+    margin-bottom: 20px;
+    background-color:white;
+    color:black;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 5px;
+    margin:10px;
+}
+
+.dropbtn {
+    background-color: #006666;
+    color: white;
+    padding: 2px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    background-color: #004d4d;
+    color: silver;
+    padding: 12px 18px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #008080;
+    color:silver;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #006666;
+}
+.bod{
+    width:100%;
+    border:0px;
+    margin:0px;
+    padding: 10px;
+    background:#f5f5f0;
+    height:390px;
+
+}
+textarea{
+    border-radius: 10px;
+    padding:10px;
+}
+.hicon{
+    width:10px;
+    height:10px;
+    border-radius:500%;
+    background-color:red;
+
+}
+.hi-icon {
+    display: inline-block;
+    margin-bottom: 30px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    color: grey;
+    font-size: 72px;
+    box-shadow: 0 0 0 4px #fff;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+button{
+    border:none;
+    text-decoration:none;
+    margin:5px 30px;
+}
+
+.button{
+    background-color:white;
+}
+.comp{
+    color:black;
+    margin:10px;
+}
+.stylebutton{
+    background-color:coral;
+    padding:10px;
+    border-radius:5px;
+    width: 70px;
+    color:black
+}

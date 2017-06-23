@@ -1,67 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <asset:stylesheet src="stylesheet.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<asset:stylesheet src="loginStylesheet.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="Style.css">
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>DM | Home</title>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="Style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>DM | Home</title>
 </head>
 <body>
-<div class="container">
-    <header>
-        <table border=0 style="width:100%">
-            <tr>
-                <td style="width:70%">
-                    <h3 class="h3color">Digital Marketing</h3>
-                </td>
-                <td style="width:30%" align="center" valign="middle">
-                </td>
-            </tr>
-        </table>
-    </header>
-</div>
-<div class="row-custom">
-    <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 relative" align="center" >
+<div id="main_content" align="center">
+    <div id="container">
+        <h2>Login</h2>
+        <form action="/login/authenticate" method="post" style="margin-bottom:30px">
+            <input type='hidden' name='spring-security-redirect' value='/secure'>
 
-        <div class="para">
-            <h2 class="ap">Sign In</h2>
-        </div>
-        <div class="content">
-            <br>
-            <form action="/login/authenticate" method="post">
-                <input type='hidden' name='spring-security-redirect'
-                       value='/secure'>
-                <i class="glyphicon glyphicon-user"></i>
-                <input type="text" placeholder="User Name" required name="username"><br>
-                <i class="glyphicon glyphicon-lock"></i>
-                <input type="password" placeholder="Password" required name="password">
-                <input type="submit" class="btn" value="Sign In">
-            </form>
-            <br>
-            <br>
-            <table border=0 style="width:100%">
-                <tr>
-                    <td style="width:43%" align=center>
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#signup">Sign Up</button>
-                    </td>
-                    <td style="width:57%" align=center>
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#reset">Reset Password</button>
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <br>
-        </div>
+            <input class="box" type="text" placeholder="Enter UserName" name="username"><br>
+            <input class="box" type="password" placeholder="Enter Password" name="password"><br><br>
+            <input style="align:left" type="checkbox" name="#" value="#">Remember me<br><br>
+            <input class="box" style="background-color:#ffad33" type="submit" value="LOGIN">
+        </form>
+        <a href="#" data-toggle="modal" data-target="#reset" style="text-decoration:none"> Trouble Logging in?</a><hr>
+        <p>Don't have an account? <a href="#" data-toggle="modal" data-target="#signup" style="text-decoration:none">Sign Up</a></p>
+
+
     </div>
 </div>
 </body>
+</body>
 </html>
+
 
 <div class="signupmodal">
     <!-- Trigger the modal with a button -->
@@ -74,16 +47,16 @@
             <div class="modal-content">
                 <div class="modal-header" align="center">
                     <button type="button" class="close" data-dismiss="modal" style="width: 4%">&times;</button>
-                    <h2 class="modal-title">Create Account</h2>
+                    <h2 class="modal-title">Create an Account</h2>
                 </div>
                 <div class="modal-body" align="center">
                     <g:form name="my" url="[controller:'User', action:'createUser']">
-                        <input type="text" placeholder="Name" required name="username">
-                        <input type="email" placeholder="Email" required name="email">
-                        <input type="text" placeholder="Contact No" required name="contact">
-                        <input type="text" placeholder="Industry" required name="industry">
-                        <input type="text" placeholder="Company Name" required name="company">
-                        <input type="password" placeholder="Password" required name="password">
+                        <input class="text" type="text" placeholder="Name" required name="username"><br>
+                        <input class="text" type="email" placeholder="Email" required name="email"><br>
+                        <input class="text" type="text" placeholder="Contact No" required name="contact"><br>
+                        <input class="text" type="text" placeholder="Industry" required name="industry"><br>
+                        <input class="text" type="text" placeholder="Company Name" required name="company"><br>
+                        <input class="text" type="password" placeholder="Password" required name="password"><br>
                         <input type="submit" class="btn" value="Sign Up">
                     </g:form>
                 </div>
@@ -96,7 +69,6 @@
     </div>
 
 </div>
-
 
 <div class="resetmodal">
     <!-- Trigger the modal with a button -->
@@ -113,7 +85,7 @@
                 </div>
                 <div class="modal-body" align="center">
                     <form>
-                        <input type="text" placeholder="Email Address" required name="email">
+                        <input type="text" placeholder="Email Address" style="width:60%; margin:5px; padding:5px" required name="email">
                     </form>
                 </div>
                 <div class="modal-footer">
